@@ -568,7 +568,7 @@ class RapportController extends Controller
             $topShipTypes = $shipTypesData->sortByDesc('count')->values()->take(3)->toArray();
             $topShipTypesFlags = [];
             foreach ($topShipTypes as $shipTypeItem) {
-                $flagRecord = \App\Models\Article::where('ship_type', $shipTypeItem['name'])
+                $flagRecord = Article::where('ship_type', $shipTypeItem['name'])
                     ->selectRaw('flag, COUNT(*) as count')
                     ->groupBy('flag')
                     ->orderByDesc('count')
@@ -700,8 +700,8 @@ class RapportController extends Controller
             $cabotageBase64   = 'data:image/png;base64,' . base64_encode($results['cabotageChartImage']->getBody()->getContents());
     
             // Récupération des données pour Avurnav et Pollution
-            $avurnavQuery = \App\Models\Avurnav::query();
-            $pollutionQuery = \App\Models\Pollution::query();
+            $avurnavQuery = Avurnav::query();
+            $pollutionQuery = Pollution::query();
             if ($dateFilter) {
                 $avurnavQuery->whereDate('created_at', $dateFilter);
                 $pollutionQuery->whereDate('created_at', $dateFilter);
@@ -777,7 +777,6 @@ class RapportController extends Controller
                 'shipTypesChartBase64' => $shipTypesChartBase64,
                 'topShipTypes'         => $topShipTypes,
                 'topShipTypesFlags'    => $topShipTypesFlags,
-                // 'cabotageData'         => $cabotageData
                 'passageInoffensifs' => $passageInoffensifs,
                 'cabotageData'         => $cabotageData,
                 'cabotageBase64'       => $cabotageBase64
@@ -793,6 +792,4 @@ class RapportController extends Controller
     
         return $pdf->download('rapport_' . $data['filterResult'] . '.pdf');
     }
-    
-
-}  
+}

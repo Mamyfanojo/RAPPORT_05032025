@@ -23,6 +23,7 @@ class SitrepController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'date' => 'date',
             'sitrep_sar' => 'required|string',
             'mrcc_madagascar' => 'required|string',
             'event' => 'required|string',
@@ -40,19 +41,12 @@ class SitrepController extends Controller
         return redirect()->route('sitreps.index')->with('success', 'SITREP ajouté avec succès.');
     }
 
-    public function show(Sitrep $sitrep)
-    {
-        return view('sitreps.show', compact('sitrep'));
-    }
 
-    public function edit(Sitrep $sitrep)
-    {
-        return view('surveillance.sitreps.edit', compact('sitrep'));
-    }
 
     public function update(Request $request, Sitrep $sitrep)
     {
         $request->validate([
+            'date' => 'date',
             'sitrep_sar' => 'required|string',
             'mrcc_madagascar' => 'required|string',
             'event' => 'required|string',
@@ -81,9 +75,5 @@ class SitrepController extends Controller
         $sitrep = Sitrep::findOrFail($id);
         $pdf = Pdf::loadView('surveillance.sitreps.pdf', compact('sitrep'));
         return $pdf->download('sitrep_'.$id.'.pdf');
-    }
-
-    
-
-   
+    }   
 }

@@ -24,7 +24,7 @@
         <table class="table table-bordered table-hover table-striped">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
+                    <th>Date</th>
                     <th>SITREP SAR</th>
                     <th>MRCC Madagascar</th>
                     <th>Event</th>
@@ -41,7 +41,7 @@
             <tbody>
                 @foreach($sitreps as $sitrep)
                     <tr>
-                        <td><small>{{ $sitrep->id }}</small></td>
+                        <td><small>{{ $sitrep->date }}</small></td>
                         <td><small>{{ $sitrep->sitrep_sar }}</small></td>
                         <td><small>{{ $sitrep->mrcc_madagascar }}</small></td>
                         <td><small>{{ $sitrep->event }}</small></td>
