@@ -747,9 +747,6 @@ class RapportController extends Controller
             }
             $passageInoffensifs = $passageInoffensifQuery->get();
             
-           
-
-    
             return [
                 'filterResult'         => $filterResult,
                 'typesData'            => $typesData,
